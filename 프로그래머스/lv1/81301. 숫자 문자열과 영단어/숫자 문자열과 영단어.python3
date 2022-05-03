@@ -1,0 +1,15 @@
+def solution(s):
+  number = ['zero', 'one', 'two', 'three', 'four', 'five' , 'six', 'seven', 'eight', 'nine']
+  i = 0
+  
+  while i<10:
+    if s.find(number[i]) != -1:
+      index = s.find(number[i])
+      num = str(i)
+      index2 = index+len(number[i])
+      s = s[:index] + num + s[index2:]
+    if s.find(number[i]) != -1:
+      continue
+    i += 1
+  answer = int(s)
+  return answer
