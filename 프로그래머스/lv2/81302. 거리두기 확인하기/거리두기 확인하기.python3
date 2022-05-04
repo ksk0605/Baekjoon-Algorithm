@@ -1,0 +1,39 @@
+def solution(places):
+  answer = []
+  for i in range(5):
+    answer.append(check(places[i]))
+  return answer
+
+def check(room):
+  dir1 = [[-1,0], [1,0], [0,1], [0,-1]]
+  dir2 = [[-2,0], [2,0], [0,2], [0,-2]]
+  diago = [[1,1], [1,-1], [-1,1], [-1,-1]]
+  result = True
+  
+  for r in range(5):
+    for c in range(5):
+      if room[r][c] == 'P':
+        for i in range(4):
+          row = r + dir1[i][0]
+          col = c + dir1[i][1]
+          if 0<=row<=4 and 0 <=col<= 4 and room[row][col] == 'P':
+            result = False
+  
+        for i in range(4):
+          row = r + dir2[i][0]
+          col = c + dir2[i][1]
+          if 0<=row<=4 and 0 <= col <= 4 and room[row][col] == 'P':
+            if room[row - dir2[i][0] // 2][col - dir2[i][1] // 2] == 'P' or room[row - dir2[i][0] // 2][col - dir2[i][1] // 2] == 'O':
+              result = False
+  
+        for i in range(4):
+          row = r + diago[i][0]
+          col = c + diago[i][1]
+          if 0<=row<=4 and 0 <= col <= 4 and room[row][col] == 'P':
+             if room[row - diago[i][0]][col] != 'X' or room[row][col - diago[i][1]] != 'X':
+               result = False 
+
+  if result == True:
+    return 1
+  else:
+    return 0
